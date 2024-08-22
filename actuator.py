@@ -60,7 +60,7 @@ if __name__ == '__main__':
         Actuator('aquecedor', 1, 1234),
         Actuator('resfriador', -1, 1234),
         Actuator('irrigador', 1, 1234),
-        Actuator('injetor', 10, 1234),
+        Actuator('injetor', 5, 1234),
     ]
     
     for actuator in actuators:

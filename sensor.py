@@ -65,6 +65,7 @@ class Sensor:
         while True:
             self.value += uniform(self.min_delta, self.max_delta)
             
+            print('Enviando dados ao gerenciador...')
             s.sendall(dumps({ 'type': 'sensor', 'id': self.id, 'value': self.value }).encode())
             
             sleep(1)
@@ -80,8 +81,8 @@ class Sensor:
 if __name__ == '__main__':
     sensors = [
         Sensor('temperatura', uniform(0, 35), -0.1, 0.2, 1234),
-        Sensor('umidade', uniform(0, 100), -0.1, 0, 1234),
-        Sensor('co2', uniform(0, 1000), -1, 0, 1234),
+        Sensor('umidade', uniform(25, 100), -0.1, 0, 1234),
+        Sensor('co2', uniform(100, 1000), -1, 0, 1234),
     ]
     
     for sensor in sensors:

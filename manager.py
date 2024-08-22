@@ -110,18 +110,22 @@ class Manager:
                                 continue
                             
                             if data['value'] < sensor['min_value']:
-                                print('Ligando o aquecedor')
+                                if not aquecedor['state']:
+                                    print('Ligando o aquecedor')
                                 aquecedor['conn'].sendall(dumps({ 'state': True }).encode())
                 
                             elif data['value'] > sensor['max_value']:
-                                print('Ligando o resfriador')
+                                if not resfriador['state']:
+                                    print('Ligando o resfriador')
                                 resfriador['conn'].sendall(dumps({ 'state': True }).encode())
                             
                             else:
-                                print('Desligando o aquecedor')
+                                if aquecedor['state']:
+                                    print('Desligando o aquecedor')
                                 aquecedor['conn'].sendall(dumps({ 'state': False }).encode())
                         
-                                print('Desligando o resfriador')
+                                if resfriador['state']:
+                                    print('Desligando o resfriador')
                                 resfriador['conn'].sendall(dumps({ 'state': False }).encode())
                                 
                         case 'umidade':
@@ -131,10 +135,12 @@ class Manager:
                                 continue
                             
                             if data['value'] < sensor['min_value']:
-                                print('Ligando o irrigador')
+                                if not irrigador['state']:
+                                    print('Ligando o irrigador')
                                 irrigador['conn'].sendall(dumps({ 'state': True }).encode())
                             else:
-                                print('Desligando o irrigador')
+                                if irrigador['state']:
+                                    print('Desligando o irrigador')
                                 irrigador['conn'].sendall(dumps({ 'state': False }).encode())
                                 
                         case 'co2':
@@ -144,10 +150,12 @@ class Manager:
                                 continue
                             
                             if data['value'] < sensor['min_value']:
-                                print('Ligando o injetor')
+                                if not injetor['state']:
+                                    print('Ligando o injetor')
                                 injetor['conn'].sendall(dumps({ 'state': True }).encode())
                             else:
-                                print('Desligando o injetor')
+                                if injetor['state']:
+                                    print('Desligando o injetor')
                                 injetor['conn'].sendall(dumps({ 'state': False }).encode())
                     
                 case 'atuador':
